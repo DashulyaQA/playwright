@@ -13,19 +13,22 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests",
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
+  testMatch: "**.spec.ts",
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
+  // ["json", { fileName: "results.json" }],
+
   testIgnore: "**.skip.ts",
   outputDir: "res",
-  globalSetup: "global-setup.ts", // before all test
-  globalTeardown: "global-setup.ts", // after all tests
+  // globalSetup: "global-setup.ts", // before all test
+  // globalTeardown: "global-setup.ts", // after all tests
   // grep: new RegExp('has title') // ранит только выбраные тесты, можно и по тегу {tag: "@api"}
   // after all tests
   // testMatch: "",
@@ -36,58 +39,57 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     headless: false,
-    trace: "on-first-retry",
-    video: "retain-on-failure",
+    baseURL: "https://qauto.forstudy.space/",
+    httpCredentials: {
+      username: "guest",
+      password: "welcome2qauto",
+    },
+    trace: "on",
+    testIdAttribute: "qa-dont-touch",
   },
-
-  /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-    },
-
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
-    {
       name: "qauto",
-      testMatch: "**.qauto.spec.ts",
-      use: {
-        headless: false,
-        baseURL: "https://qauto.forstudy.space/",
-        httpCredentials: {
-          username: "guest",
-          password: "welcome2qauto",
-        },
-      },
+      testMatch: "**.spec.ts",
     },
-    // {
-    //   name: "webkit",
-    //   use: { ...devices["Desktop Safari"] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
+
+  /* Configure projects for major browsers */
+
+  // {
+  //   name: "chromium",
+  //   use: { ...devices["Desktop Chrome"] },
+  // },
+
+  // {
+  //   name: "firefox",
+  //   use: { ...devices["Desktop Firefox"] },
+  // },
+
+  // {
+  //   name: "webkit",
+  //   use: { ...devices["Desktop Safari"] },
+  // },
+
+  /* Test against mobile viewports. */
+  // {
+  //   name: 'Mobile Chrome',
+  //   use: { ...devices['Pixel 5'] },
+  // },
+  // {
+  //   name: 'Mobile Safari',
+  //   use: { ...devices['iPhone 12'] },
+  // },
+
+  /* Test against branded browsers. */
+  // {
+  //   name: 'Microsoft Edge',
+  //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+  // },
+  // {
+  //   name: 'Google Chrome',
+  //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+  // },
 
   /* Run your local dev server before starting the tests */
   // webServer: {
