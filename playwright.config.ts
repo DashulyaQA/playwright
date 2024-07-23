@@ -10,14 +10,14 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 export default defineConfig({
   testDir: "./tests",
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
-  testMatch: "**.spec.ts",
+  // testMatch: "**.spec.ts",
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   // ["json", { fileName: "results.json" }],
@@ -47,7 +47,24 @@ export default defineConfig({
   projects: [
     {
       name: "qauto",
+      testMatch: "cars.spec.ts",
+      use: {
+        ...devices["Desktop Chrome"],
+        // storageState: "session-storage.json",
+      },
+      // dependencies: ["login"],
+    },
+    {
+      name: "login",
+      testMatch: "login.setup.ts",
+      testDir: "./tests",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "fixtures",
       testMatch: "**.spec.ts",
+      testDir: "./fixtures",
+      use: { ...devices["Desktop Chrome"] },
     },
   ],
 
