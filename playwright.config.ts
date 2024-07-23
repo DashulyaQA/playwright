@@ -57,15 +57,33 @@ export default defineConfig({
     {
       name: "login",
       testMatch: "login.setup.ts",
-      testDir: "./tests",
-      use: { ...devices["Desktop Chrome"] },
+      // testDir: "./tests",
+      use: {
+        ...devices["Desktop Chrome"],
+      },
     },
     {
-      name: "fixtures",
-      testMatch: "**.spec.ts",
-      testDir: "./fixtures",
-      use: { ...devices["Desktop Chrome"] },
+      name: "moking",
+      testMatch: "change.profile.spec.ts",
+      testDir: "./tests",
+      use: {
+        ...devices["Desktop Chrome"],
+      },
     },
+    {
+      name: "apicars",
+      testMatch: "**cars.ts",
+      testDir: "./tests",
+      use: {
+        ...devices["Desktop Chrome"],
+      },
+    },
+    // {
+    //   name: "fixtures",
+    //   testMatch: "**.spec.ts",
+    //   testDir: "./fixtures",
+    //   use: { ...devices["Desktop Chrome"] },
+    // },
   ],
 
   /* Configure projects for major browsers */
