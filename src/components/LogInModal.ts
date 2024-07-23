@@ -19,3 +19,4 @@ export class LogInModal extends BaseComponent {
     await this._loginBtn.click();
   }
 }
+// login

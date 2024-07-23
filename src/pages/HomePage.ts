@@ -35,3 +35,4 @@ export class HomePage extends BasePage {
     return this._header;
   }
 }
+//pagesHome

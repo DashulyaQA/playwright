@@ -8,3 +8,4 @@ export class BaseComponent {
     (this._page = page), (this._container = container);
   }
 }
+//base

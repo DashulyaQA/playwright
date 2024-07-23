@@ -50,3 +50,4 @@ export class GaragePage extends BasePage {
     return this._carItem.allTextContents();
   }
 }
+// test

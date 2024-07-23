@@ -35,3 +35,4 @@ export class SideBarComponent extends BaseComponent {
     return this._logOutBtn;
   }
 }
+// side bar
