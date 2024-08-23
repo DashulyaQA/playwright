@@ -14,6 +14,7 @@ function getLocators(page: Page) {
   const passwordInput = modal.locator("#signupPassword");
   const confirmPassInput = modal.locator("#signupRepeatPassword");
   const myProfile = page.locator("#userNavDropdown");
+  const garageTitle = page.getByRole("button", {name: "Add car"} )
 
   return {
     header,
@@ -27,6 +28,7 @@ function getLocators(page: Page) {
     passwordInput,
     confirmPassInput,
     myProfile,
+    garageTitle
   };
 }
 test("Register user correct", async ({ page }) => {
@@ -42,6 +44,7 @@ test("Register user correct", async ({ page }) => {
     passwordInput,
     confirmPassInput,
     myProfile,
+    garageTitle
   } = getLocators(page);
 
   await signInBtn?.click();
@@ -52,7 +55,7 @@ test("Register user correct", async ({ page }) => {
   await passwordInput.fill("Password1234!");
   await confirmPassInput.fill("Password1234!");
   await registrBtn.click();
-  await expect(myProfile).toBeVisible();
+  await expect(garageTitle).toBeVisible();
 });
 
 test("Passwords not match", async ({ page }) => {
