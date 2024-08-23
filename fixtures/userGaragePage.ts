@@ -19,4 +19,3 @@ export const userGaragePage = baseTest.extend<{ pageGarage: Page }>({
     await use(pageFromStorage);
   },
 });
-// fixtrure

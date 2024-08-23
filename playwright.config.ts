@@ -35,7 +35,7 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    headless: false,
+    headless: true,
     baseURL: process.env.BASE_URL,
     httpCredentials: {
       username: process.env.USER_NAME!,
@@ -48,6 +48,7 @@ export default defineConfig({
     {
       name: "qauto",
       testMatch: "cars.spec.ts",
+      testDir: "./tests",
       use: {
         ...devices["Desktop Chrome"],
         // storageState: "session-storage.json",
@@ -57,14 +58,14 @@ export default defineConfig({
     {
       name: "login",
       testMatch: "login.setup.ts",
-      // testDir: "./tests",
+      testDir: "./tests",
       use: {
         ...devices["Desktop Chrome"],
       },
     },
     {
       name: "moking",
-      testMatch: "change.profile.spec.ts",
+      testMatch: "**spec.ts",
       testDir: "./tests",
       use: {
         ...devices["Desktop Chrome"],
@@ -72,7 +73,7 @@ export default defineConfig({
     },
     {
       name: "apicars",
-      testMatch: "**cars.ts",
+      testMatch: "api.create.cars.ts",
       testDir: "./tests",
       use: {
         ...devices["Desktop Chrome"],
