@@ -6,7 +6,7 @@ export class BasePage {
 
   constructor(page: Page, url: string) {
     this._page = page;
-    this._url = url;
+    this._url = url || 'https://qauto.forstudy.space/'
   }
 
   async navigate() {

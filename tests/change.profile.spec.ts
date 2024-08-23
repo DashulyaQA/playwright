@@ -27,7 +27,6 @@ test("Login", async ({ page }) => {
     })
   );
   await page.getByRole("link", { name: "Profile" }).click();
-  await page.pause();
   const profileName = await page.getByText("The Best student").isVisible();
   expect(profileName).toBeTruthy();
 });
